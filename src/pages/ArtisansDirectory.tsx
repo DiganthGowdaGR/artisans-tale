@@ -1,11 +1,22 @@
+import Navbar from "@/components/Navbar";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Star, MapPin, ArrowRight, Heart } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { 
+  Star, 
+  MapPin, 
+  ArrowRight, 
+  Heart, 
+  Filter,
+  Search,
+  SlidersHorizontal,
+  Award
+} from "lucide-react";
 import { Link } from "react-router-dom";
 import artisanWoman from "@/assets/artisan-woman.jpg";
 
-const FeaturedArtisans = () => {
+const ArtisansDirectory = () => {
   const artisans = [
     {
       id: 1,
@@ -18,7 +29,8 @@ const FeaturedArtisans = () => {
       bio: "Third-generation weaver keeping ancient Zapotec traditions alive",
       specialties: ["Rugs", "Textiles", "Wall Art"],
       yearsExperience: 25,
-      featured: true
+      featured: true,
+      verified: true
     },
     {
       id: 2,
@@ -31,7 +43,8 @@ const FeaturedArtisans = () => {
       bio: "Master potter creating contemporary pieces with traditional techniques",
       specialties: ["Bowls", "Vases", "Tea Sets"],
       yearsExperience: 18,
-      featured: false
+      featured: false,
+      verified: true
     },
     {
       id: 3,
@@ -44,25 +57,134 @@ const FeaturedArtisans = () => {
       bio: "Sculptural artist preserving West African storytelling traditions",
       specialties: ["Masks", "Sculptures", "Decorative Items"],
       yearsExperience: 22,
-      featured: true
+      featured: true,
+      verified: true
+    },
+    {
+      id: 4,
+      name: "Isabella Condori",
+      craft: "Textile Art",
+      location: "Cusco, Peru",
+      rating: 4.7,
+      reviews: 94,
+      image: "/api/placeholder/300/300",
+      bio: "Andean textile artist weaving stories of ancestral wisdom",
+      specialties: ["Tapestries", "Clothing", "Accessories"],
+      yearsExperience: 15,
+      featured: false,
+      verified: true
+    },
+    {
+      id: 5,
+      name: "Ahmed Hassan",
+      craft: "Metalwork",
+      location: "Marrakech, Morocco",
+      rating: 4.6,
+      reviews: 73,
+      image: "/api/placeholder/300/300",
+      bio: "Traditional metalworker creating intricate brass and copper pieces",
+      specialties: ["Lamps", "Trays", "Decorative Items"],
+      yearsExperience: 20,
+      featured: false,
+      verified: true
+    },
+    {
+      id: 6,
+      name: "Priya Sharma",
+      craft: "Hand Painting",
+      location: "Jaipur, India",
+      rating: 4.8,
+      reviews: 112,
+      image: "/api/placeholder/300/300",
+      bio: "Miniature painter preserving Rajasthani artistic traditions",
+      specialties: ["Paintings", "Portraits", "Decorative Art"],
+      yearsExperience: 12,
+      featured: false,
+      verified: true
     }
   ];
 
+  const regions = ["All Regions", "North America", "South America", "Europe", "Asia", "Africa", "Oceania"];
+  const crafts = ["All Crafts", "Weaving", "Pottery", "Wood Carving", "Metalwork", "Painting", "Jewelry"];
+  const experience = ["All Experience", "1-5 years", "6-10 years", "11-20 years", "20+ years"];
+
   return (
-    <section className="py-20 bg-gradient-earth">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
-        <div className="text-center mb-16">
+    <div className="min-h-screen bg-background">
+      <Navbar />
+      
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        {/* Header */}
+        <div className="text-center mb-12">
           <Badge className="mb-4 px-4 py-2 bg-primary/10 text-primary border-primary/20">
-            Featured Masters
+            Artisan Directory
           </Badge>
-          <h2 className="text-4xl md:text-5xl font-display font-bold mb-6">
-            Meet Our <span className="text-primary">Master Artisans</span>
-          </h2>
+          <h1 className="text-4xl md:text-5xl font-display font-bold mb-6">
+            Discover <span className="text-primary">Master Artisans</span>
+          </h1>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Discover the passionate craftspeople behind extraordinary creations, 
-            each with their own unique story and generations of tradition.
+            Connect with skilled craftspeople from around the world. Each artisan brings 
+            generations of cultural heritage and expertise to their craft.
           </p>
+        </div>
+
+        {/* Search and Filters */}
+        <div className="mb-12">
+          <div className="flex flex-col lg:flex-row gap-4 mb-6">
+            {/* Search Bar */}
+            <div className="flex-1 relative">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
+              <Input
+                placeholder="Search artisans by name, craft, or location..."
+                className="pl-10 bg-muted/50 border-border/50 focus:bg-background h-12"
+              />
+            </div>
+            
+            {/* Filter Button */}
+            <Button 
+              variant="outline" 
+              className="lg:w-auto w-full bg-background/80 backdrop-blur-sm border-border/50 h-12"
+            >
+              <SlidersHorizontal className="w-4 h-4 mr-2" />
+              Filters
+            </Button>
+          </div>
+
+          {/* Quick Filters */}
+          <div className="flex flex-wrap gap-2">
+            {regions.slice(0, 4).map((region) => (
+              <Button
+                key={region}
+                variant="outline"
+                size="sm"
+                className="bg-muted/30 border-border/50 hover:bg-muted/50"
+              >
+                {region}
+              </Button>
+            ))}
+            {crafts.slice(0, 4).map((craft) => (
+              <Button
+                key={craft}
+                variant="outline"
+                size="sm"
+                className="bg-muted/30 border-border/50 hover:bg-muted/50"
+              >
+                {craft}
+              </Button>
+            ))}
+          </div>
+        </div>
+
+        {/* Results Summary */}
+        <div className="flex items-center justify-between mb-8">
+          <div className="text-muted-foreground">
+            Showing <span className="font-semibold text-foreground">{artisans.length}</span> artisans
+          </div>
+          <div className="flex items-center gap-2">
+            <span className="text-sm text-muted-foreground">Sort by:</span>
+            <Button variant="ghost" size="sm" className="text-primary">
+              Rating <ArrowRight className="w-3 h-3 ml-1 rotate-90" />
+            </Button>
+          </div>
         </div>
 
         {/* Artisans Grid */}
@@ -79,10 +201,16 @@ const FeaturedArtisans = () => {
                     alt={`${artisan.name} - ${artisan.craft}`}
                     className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-300"
                   />
-                  <div className="absolute top-4 right-4">
+                  <div className="absolute top-4 right-4 flex gap-2">
                     {artisan.featured && (
                       <Badge className="bg-accent/90 text-accent-foreground border-0">
                         Featured
+                      </Badge>
+                    )}
+                    {artisan.verified && (
+                      <Badge className="bg-green-100 text-green-700 border-green-200">
+                        <Award className="w-3 h-3 mr-1" />
+                        Verified
                       </Badge>
                     )}
                   </div>
@@ -162,22 +290,19 @@ const FeaturedArtisans = () => {
           ))}
         </div>
 
-        {/* CTA */}
+        {/* Load More */}
         <div className="text-center">
-          <Link to="/artisans">
-            <Button 
-              size="lg" 
-              variant="outline"
-              className="bg-background/80 backdrop-blur-sm border-border/50 hover:bg-background"
-            >
-              Explore All Artisans
-              <ArrowRight className="ml-2 w-5 h-5" />
-            </Button>
-          </Link>
+          <Button 
+            size="lg" 
+            variant="outline"
+            className="bg-background/80 backdrop-blur-sm border-border/50 hover:bg-background"
+          >
+            Load More Artisans
+          </Button>
         </div>
       </div>
-    </section>
+    </div>
   );
 };
 
-export default FeaturedArtisans;
+export default ArtisansDirectory;

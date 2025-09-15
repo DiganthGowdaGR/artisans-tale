@@ -4,9 +4,11 @@ import { Search, Globe, Heart, ShoppingCart, Menu, X, Sparkles } from "lucide-re
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
+import BecomeArtisanModal from "./BecomeArtisanModal";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isArtisanModalOpen, setIsArtisanModalOpen] = useState(false);
   const location = useLocation();
 
   const navItems = [
@@ -82,7 +84,10 @@ const Navbar = () => {
               </span>
             </Button>
 
-            <Button className="hidden md:flex bg-gradient-sunset hover:opacity-90">
+            <Button 
+              className="hidden md:flex bg-gradient-sunset hover:opacity-90"
+              onClick={() => setIsArtisanModalOpen(true)}
+            >
               Become Artisan
             </Button>
 
@@ -128,7 +133,10 @@ const Navbar = () => {
               ))}
               
               <div className="pt-4 border-t border-border">
-                <Button className="w-full bg-gradient-sunset">
+                <Button 
+                  className="w-full bg-gradient-sunset"
+                  onClick={() => setIsArtisanModalOpen(true)}
+                >
                   Become Artisan
                 </Button>
               </div>
@@ -136,6 +144,11 @@ const Navbar = () => {
           </div>
         )}
       </div>
+      
+      <BecomeArtisanModal 
+        open={isArtisanModalOpen} 
+        onOpenChange={setIsArtisanModalOpen} 
+      />
     </nav>
   );
 };

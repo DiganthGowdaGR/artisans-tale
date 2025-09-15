@@ -4,10 +4,12 @@ import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Sparkles, Send, MessageCircle, Wand2, Globe, Heart } from "lucide-react";
+import AIDescriptionModal from "./AIDescriptionModal";
 
 const AIAssistant = () => {
   const [message, setMessage] = useState("");
   const [isTyping, setIsTyping] = useState(false);
+  const [isDescriptionModalOpen, setIsDescriptionModalOpen] = useState(false);
   
   const [conversation, setConversation] = useState([
     {
@@ -211,7 +213,12 @@ const AIAssistant = () => {
                   <p className="text-sm text-muted-foreground mb-4">
                     Every product gets a beautiful, culturally-aware story that honors the craft and artisan.
                   </p>
-                  <Button variant="outline" size="sm" className="border-accent/30 hover:bg-accent/10">
+                  <Button 
+                    variant="outline" 
+                    size="sm" 
+                    className="border-accent/30 hover:bg-accent/10"
+                    onClick={() => setIsDescriptionModalOpen(true)}
+                  >
                     Learn More
                   </Button>
                 </CardContent>
@@ -220,6 +227,11 @@ const AIAssistant = () => {
           </div>
         </div>
       </div>
+      
+      <AIDescriptionModal 
+        open={isDescriptionModalOpen} 
+        onOpenChange={setIsDescriptionModalOpen} 
+      />
     </section>
   );
 };
