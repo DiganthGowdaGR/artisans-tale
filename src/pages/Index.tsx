@@ -1,12 +1,32 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import Navbar from "@/components/Navbar";
+import HeroSection from "@/components/HeroSection";
+import FeaturedArtisans from "@/components/FeaturedArtisans";
+import AIAssistant from "@/components/AIAssistant";
 
 const Index = () => {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="mb-4 text-4xl font-bold">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
-      </div>
+    <div className="min-h-screen">
+      <Navbar />
+      <HeroSection />
+      <FeaturedArtisans />
+      <AIAssistant />
+      
+      {/* Footer */}
+      <footer className="bg-card border-t border-border py-12">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center">
+            <div className="font-display font-bold text-xl mb-4">
+              ARTISAN <span className="text-primary">PLUS</span>
+            </div>
+            <p className="text-muted-foreground mb-4">
+              Connecting traditions with modern hearts
+            </p>
+            <div className="text-sm text-muted-foreground">
+              © 2024 Artisan Plus. Crafted with care for cultural heritage.
+            </div>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 };
